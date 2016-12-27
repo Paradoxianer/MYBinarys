@@ -61,17 +61,14 @@ TestAnalyser::AnalyseEntry(const entry_ref& ref)
 	BPath path(&ref);
 	BString line("");
 	ssize_t writtenBytes;
+	line << "Analyse:\t";
 	line << system_time();
 	line << "\t";
 	line << path.Path();
 	line << "\t";
 	line << ref.name;
-	line << "\t";
-	line << ref.device;
-	line << "\t";
-	line << ref.directory;
 	line << "\n";
-	STRACE("TestAnalyser AnalyseEntry: %s %s \t", ref.name, path.Path());
+	STRACE("TestAnalyser AnalyseEntry: %s %s \t", path.Path());
 	BFile fileLog = BFile(logBasePath.Path(),B_READ_WRITE|B_CREATE_FILE|B_OPEN_AT_END);
 	writtenBytes = fileLog.Write(line.String(),line.Length());
 	STRACE("error %d \n",writtenBytes);
@@ -86,6 +83,19 @@ TestAnalyser::DeleteEntry(const entry_ref& ref)
 {
 	if (_IsInIndexDirectory(ref))
 		return;
+	BPath path(&ref);
+	BString line("");
+	ssize_t writtenBytes;
+	line << "Delete:\t";
+	line << system_time();
+	line << "\t";
+	line << path.Path();
+	line << "\t";
+	line << ref.name;
+	line << "\n";
+	STRACE("TestAnalyser AnalyseEntry: %s %s \t", path.Path());
+	BFile fileLog = BFile(logBasePath.Path(),B_READ_WRITE|B_CREATE_FILE|B_OPEN_AT_END);
+	writtenBytes = fileLog.Write(line.String(),line.Length());
 	STRACE("TestAnalyser DeleteEntry: %s\n", ref.name);
 }
 
