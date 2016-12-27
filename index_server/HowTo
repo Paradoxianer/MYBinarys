@@ -1,0 +1,6 @@
+create a link
+from Index_Server_TestAddon/objects.x86-gcc2-debug/TestAnalyser
+to /boot/home/config/non-packaged/add-ons/index_server
+Then Pls run index_server from terminal
+
+and watch it work :-D
